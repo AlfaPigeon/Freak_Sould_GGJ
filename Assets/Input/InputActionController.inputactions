@@ -51,18 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ragdoll",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "4b0e18d6-5bc3-4663-8823-5396f024fd33",
+                    "id": "72c64363-c864-46ec-a420-929cdbb718c8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Ragdoll",
                     "type": "Button",
-                    "id": "5cc8b381-f88c-4559-9b4a-53fdd0c75356",
+                    "id": "8a8da43c-b986-4555-9af3-2454dbb8a0c0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -215,23 +215,23 @@
                 },
                 {
                     "name": "",
-                    "id": "d9305c66-2ee6-4f61-96bb-9c9975915f58",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ragdoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5a5dcd8e-46e5-48cf-b5b2-6f6ac8f01bcc",
+                    "id": "5afdeb78-7475-488a-9d97-bb6443e82daa",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ababb00e-feed-46de-af59-14c53da7f82a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ragdoll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

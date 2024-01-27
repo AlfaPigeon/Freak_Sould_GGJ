@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
 
         #region Attack
-        if(battleController != null && GetLeftClick())battleController.Attack();
+        if(battleController != null && GetLeftClick() && movement.IsGrounded())battleController.Attack();
         #endregion
 
     }

@@ -57,7 +57,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9128564
+      - time: 0.9099784
         functionName: OnRolling
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: f82edd0ea73e28e6e905e0ba9a1b839a, type: 3}
