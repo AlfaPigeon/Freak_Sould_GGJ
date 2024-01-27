@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -2320,7 +2320,6 @@ GameObject:
   - component: {fileID: 6340368034768168962}
   - component: {fileID: 7633498089410047615}
   - component: {fileID: 7674564407231386984}
-  - component: {fileID: 2776986005686394871}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2360,7 +2359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMove: 1
   WalkSpeed: 4
-  SprintSpeed: 8
+  SprintSpeed: 10
   CameraTransform: {fileID: 7583377745961105015}
   rotationSpeed: 5
   player: {fileID: 4843528627544193055}
@@ -2533,22 +2532,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4843528627544193055}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnRagdoll
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4b0e18d6-5bc3-4663-8823-5396f024fd33
-    m_ActionName: Default/Ragdoll[/Keyboard/r]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4843528627544193055}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnLeftClick
         m_Mode: 0
         m_Arguments:
@@ -2559,8 +2542,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5cc8b381-f88c-4559-9b4a-53fdd0c75356
+    m_ActionId: 72c64363-c864-46ec-a420-929cdbb718c8
     m_ActionName: Default/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4843528627544193055}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnRagdoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8a8da43c-b986-4555-9af3-2454dbb8a0c0
+    m_ActionName: Default/Ragdoll[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default
@@ -2618,21 +2617,6 @@ MonoBehaviour:
   CurrentHealth: 0
   CurrentStamina: 0
   CurrentKnockShield: 0
---- !u!114 &2776986005686394871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3162134019970644338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9036664748b7e7139b684576c85ed8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackPower: 30
-  Invulnarable: 0
-  combo_timer: 1
 --- !u!1 &3207987539685234696
 GameObject:
   m_ObjectHideFlags: 0

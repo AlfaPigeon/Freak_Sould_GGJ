@@ -45,10 +45,10 @@ public class BattleController : MonoBehaviour
     public void Attack()
     {
         if (Attacking) return;
+        Attacking = true;
         animator.SetBool("Attack", true);
         
         current_combo_timer = 0f;
-        Attacking = true;
         animator.applyRootMotion = true;
         if(playerMovement != null)playerMovement.CanMove = false;
     }
@@ -58,23 +58,14 @@ public class BattleController : MonoBehaviour
     {
         //Hit every enemy in vicinity, if single enemy exist and yo uare behind do a back stab
         animator.SetInteger("AttackCounter", (animator.GetInteger("AttackCounter") + 1) % 3);
+        Debug.Log(animator.gameObject.name);
         Attacking = false;
         if(playerMovement != null)playerMovement.CanMove = true;
-        if (player != null)
-        {
-            // animator.SetBool("Attack", player.GetLeftClick());
-            
-        }
-        else
-        {
-            animator.SetBool("Attack", false);
-        }
-
     }
 
     private void Update()
     {
-        // if(Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0)return;
+        if(Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0)return;
         current_combo_timer+=Time.deltaTime;
         if(current_combo_timer >= combo_timer){
             current_combo_timer = 0f;
