@@ -39,23 +39,24 @@ public class PlayerMovement : MovementBase
         #region movement
         if (CanMove)
         {
-            Speed = player.GetSprint()?SprintSpeed:WalkSpeed;
+            
             Vector3 flat_cam_dir= (transform.position - new Vector3(CameraTransform.position.x,transform.position.y,CameraTransform.position.z)).normalized;
             Vector3 mov_dir = flat_cam_dir * MovementVector.y;
             Vector3 rightVector = Vector3.Cross(flat_cam_dir, Vector3.up).normalized;
 
             mov_dir = mov_dir + (rightVector* -MovementVector.x);
 
-            rb.velocity = new Vector3(mov_dir.x*Speed,rb.velocity.y,mov_dir.z*Speed);
+            rb.velocity = new Vector3(mov_dir.x*WalkSpeed,rb.velocity.y,mov_dir.z*WalkSpeed);
         }
-     
-
-
+        else
+        {
+            velocity.x = 0;
+            velocity.y = 0;
+        }
         #endregion
 
         #region Orientation
-
-        if (CanMove && rb.velocity != Vector3.zero)
+        if (rb.velocity != Vector3.zero)
         {
             Vector3 targ_vec = rb.velocity;
             targ_vec.y = 0;
@@ -66,17 +67,8 @@ public class PlayerMovement : MovementBase
 
 
         #region animations
-        if(MovementVector != Vector2.zero){
-            
-            animator.SetBool("Walk",true);
-            animator.SetBool("Run",player.GetSprint());
 
-        }else{
-            animator.SetBool("Walk",false);
-            animator.SetBool("Run",false);
-        }
 
-        animator.SetBool("Fall",!IsGrounded());
         #endregion
   
     }
@@ -94,34 +86,5 @@ public class PlayerMovement : MovementBase
     {
         return MovementVector;
     }
-    public float JumpPower;
 
-
-   public void Roll(){
-        if(!IsGrounded() || animator.GetBool("Roll"))return;
-        animator.SetBool("Roll",true);
-        animator.applyRootMotion = true;
-        //rb.isKinematic = true;
-        CanMove = false;
-    }
-   public void OnRolling(){
-      
-        animator.SetBool("Roll",false);
-        animator.applyRootMotion = false;
-        //rb.isKinematic = false;
-        CanMove = true;
-    }
-    public void Jump(){
-        if(!IsGrounded())return;
-        animator.SetBool("Jump",true);
-    }
-
-    public void Jumping(){
-        rb.AddForce(transform.up*JumpPower);
-        animator.SetBool("Jump",false);
-    }
-    public bool IsGrounded()
-    {
-        return Mathf.Abs(rb.velocity.y) < 0.05f;
-    }
 }
