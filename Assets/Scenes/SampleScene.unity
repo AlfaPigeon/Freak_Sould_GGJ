@@ -549,9 +549,9 @@ MonoBehaviour:
   <RotationSpeed>k__BackingField: 3
   <CrossFadeDuration>k__BackingField: 0.1
   <AttackDistance>k__BackingField: 2
-  <CaptureSpeed>k__BackingField: 5
-  <AttackSpeed>k__BackingField: 0.4
-  <RestTime>k__BackingField: 0
+  <CaptureSpeed>k__BackingField: 4
+  <AttackSpeed>k__BackingField: 1
+  <RestTime>k__BackingField: 1
   <EndPoint>k__BackingField: {fileID: 599234718}
   <StartPoint>k__BackingField: {fileID: 1735935087}
   <StartState>k__BackingField: 1

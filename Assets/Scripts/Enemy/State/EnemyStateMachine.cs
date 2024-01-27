@@ -64,11 +64,11 @@ public class EnemyStateMachine : StateMachine
                 break;
             case States.AttackState:
                 SwitchState(new EnemyAttackState(this));
-                OldState = States.IdleState;
+                OldState = States.AttackState;
                 break;
             case States.TrapState:
                 SwitchState(new EnemyTrapState(this));
-                OldState = States.IdleState;
+                OldState = States.TrapState;
                 break;
         }
     }

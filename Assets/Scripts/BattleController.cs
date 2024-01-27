@@ -62,7 +62,7 @@ public class BattleController : MonoBehaviour
         if(playerMovement != null)playerMovement.CanMove = true;
         if (player != null)
         {
-            animator.SetBool("Attack", player.GetLeftClick());
+            // animator.SetBool("Attack", player.GetLeftClick());
             
         }
         else
@@ -74,7 +74,7 @@ public class BattleController : MonoBehaviour
 
     private void Update()
     {
-        if(Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0)return;
+        // if(Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0)return;
         current_combo_timer+=Time.deltaTime;
         if(current_combo_timer >= combo_timer){
             current_combo_timer = 0f;
