@@ -1,8 +1,11 @@
-
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-public class StaminaBarUI : MonoBehaviour
+public class HealthBarUI : MonoBehaviour
 {
+
     public GameObject BarObject;
     public Slider slider;
     private Stats stats;
@@ -18,8 +21,8 @@ public class StaminaBarUI : MonoBehaviour
 
     public void UpdateValue()
     {
-        slider.maxValue = stats.statsSO.MaxStamina;
-        slider.value = stats.CurrentStamina;
+        slider.maxValue = stats.statsSO.MaxHealth;
+        slider.value = stats.CurrentHealth;
     }
 
     private void Update()
