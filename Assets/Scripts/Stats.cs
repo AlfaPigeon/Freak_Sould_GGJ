@@ -7,7 +7,8 @@ public class Stats : MonoBehaviour
     public enum StatState
     {
         Normal,
-        Fainted
+        Fainted,
+        Death
     }
     public StatState stat_state = StatState.Normal;
     [Header("Stats Object")]
@@ -27,28 +28,46 @@ public class Stats : MonoBehaviour
 
     public void SetHealth(float _value)
     {
-        CurrentHealth = _value;
+
+        if (_value <= 0)
+        {
+            CurrentHealth = 0f;
+        }
+        else
+        {
+            CurrentHealth = _value;
+        }
+        if (CurrentHealth <= 0f)
+        {
+            Die();
+        }
     }
     public void SetKnockdownShield(float _value)
     {
-        KnockShieldCounter=0f;
-        if(_value <= 0){
+        KnockShieldCounter = 0f;
+        if (_value <= 0)
+        {
             CurrentKnockShield = 0f;
             stat_state = StatState.Fainted;
             ragdoll.EnableRagdoll(true);
-        }else{
+        }
+        else
+        {
             CurrentKnockShield = _value;
         }
     }
 
     public void SetStamina(float _value)
     {
-        StaminaCounter=0f;
-        if(_value <= 0){
+        StaminaCounter = 0f;
+        if (_value <= 0)
+        {
             CurrentStamina = 0f;
             stat_state = StatState.Fainted;
             ragdoll.EnableRagdoll(true);
-        }else{
+        }
+        else
+        {
             CurrentStamina = _value;
         }
     }
@@ -56,6 +75,7 @@ public class Stats : MonoBehaviour
     private float StaminaCounter;
     void Update()
     {
+        if (stat_state == StatState.Death) return;
         if (CurrentKnockShield < statsSO.MaxKnockShield)
         {
             KnockShieldCounter += Time.deltaTime;
@@ -89,6 +109,26 @@ public class Stats : MonoBehaviour
                 stat_state = StatState.Normal;
             }
         }
+
+    }
+
+
+    public void Die()
+    {
+        stat_state = StatState.Death;
+        ragdoll.EnableRagdoll(true);
+        EnemyEventHandler enemyEventHandler = GetComponent<EnemyEventHandler>();
+        if (enemyEventHandler != null)
+        {
+            Destroy(enemyEventHandler);
+        }
+
+        EnemyStateMachine state_machine = GetComponent<EnemyStateMachine>();
+        if (state_machine != null)
+        {
+            Destroy(state_machine);
+        }
+        Destroy(gameObject, 3f);
 
     }
 }

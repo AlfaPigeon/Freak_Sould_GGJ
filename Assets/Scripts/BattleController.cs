@@ -31,7 +31,7 @@ public class BattleController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void GetHit(BattleController _enemy)
+    public void GetHit(EnemyBattleController _enemy)
     {
         if (_enemy == null) return;
         if (Invulnarable) return;
@@ -79,6 +79,15 @@ public class BattleController : MonoBehaviour
         if (playerMovement != null) playerMovement.CanMove = true;
 
         stats.SetStamina(stats.CurrentStamina -15);
+
+
+
+        RaycastHit[] enemies = Physics.SphereCastAll(transform.position,2f,transform.forward,2f);
+        foreach(RaycastHit _enemy in enemies){
+            EnemyBattleController enemy_battle = _enemy.collider.gameObject.GetComponent<EnemyBattleController>();
+            if(enemy_battle != null)enemy_battle.GetHit(this);
+        }
+
     }
 
     private void Update()

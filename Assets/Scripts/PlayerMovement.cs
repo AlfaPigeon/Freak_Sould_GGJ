@@ -65,7 +65,10 @@ public class PlayerMovement : MovementBase
         }
         #endregion
 
+        #region Throw
 
+        //if(Mathf.Abs(rb.velocity.magnitude) > 20f)stats.SetStamina(0);
+        #endregion
 
         #region animations
         if(MovementVector != Vector2.zero){
