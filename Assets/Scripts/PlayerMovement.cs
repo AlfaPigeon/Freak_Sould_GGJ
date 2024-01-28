@@ -6,8 +6,7 @@ public class PlayerMovement : MovementBase
 {
 
 
-    [Header("Options")]
-    public bool CanMove = true;
+
     [Header("Movement Params")]
     [SerializeField] private float WalkSpeed;
     [SerializeField] private float SprintSpeed;
@@ -17,11 +16,14 @@ public class PlayerMovement : MovementBase
     private CharacterController characterController;
     private Animator animator;
     private Vector2 MovementVector;
-
+    private Stats stats;
+    private RagdollController ragdoll;
     private Rigidbody rb;
     public PlayerController player;
     private void Start()
     {
+        stats = GetComponent<Stats>();
+        ragdoll = GetComponent<RagdollController>();
         rb = GetComponent<Rigidbody>();
         player = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
@@ -98,18 +100,17 @@ public class PlayerMovement : MovementBase
 
 
    public void Roll(){
-        if(!IsGrounded() || animator.GetBool("Roll"))return;
+        if(!IsGrounded() || animator.GetBool("Roll") || stats.stat_state == Stats.StatState.Fainted)return;
         animator.SetBool("Roll",true);
         animator.applyRootMotion = true;
-        //rb.isKinematic = true;
         CanMove = false;
     }
    public void OnRolling(){
       
         animator.SetBool("Roll",false);
         animator.applyRootMotion = false;
-        //rb.isKinematic = false;
         CanMove = true;
+        stats.SetStamina(stats.CurrentStamina -30f);
     }
     public void Jump(){
         if(!IsGrounded())return;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,14 @@ public class BattleController : MonoBehaviour
     public float combo_timer;
     private float current_combo_timer;
     private PlayerMovement playerMovement;
+    private RagdollController ragdoll;
+
+    public GameObject AttackEffect;
+
 
     void Start()
     {
+        ragdoll = GetComponent<RagdollController>();
         stats = GetComponent<Stats>();
         player = GetComponent<PlayerController>();
         playerMovement = GetComponent<PlayerMovement>();
@@ -35,8 +41,17 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            stats.CurrentKnockShield = Mathf.Max(0f, stats.CurrentKnockShield - _enemy.AttackPower);
             stats.CurrentHealth = Mathf.Max(0f, stats.CurrentHealth - _enemy.AttackPower);
+
+            if (!ragdoll.GetRagdollState())
+            {
+                stats.CurrentKnockShield = Mathf.Max(0f, stats.CurrentKnockShield - _enemy.AttackPower);
+                if (stats.CurrentKnockShield <= 0)
+                {
+                    ragdoll.EnableRagdoll(true);
+                }
+            }
+
         }
     }
 
@@ -44,13 +59,13 @@ public class BattleController : MonoBehaviour
 
     public void Attack()
     {
-        if (Attacking) return;
+        if (Attacking || stats.stat_state == Stats.StatState.Fainted) return;
         Attacking = true;
         animator.SetBool("Attack", true);
         
         current_combo_timer = 0f;
         animator.applyRootMotion = true;
-        if(playerMovement != null)playerMovement.CanMove = false;
+        if (playerMovement != null) playerMovement.CanMove = false;
     }
 
 
@@ -58,20 +73,28 @@ public class BattleController : MonoBehaviour
     {
         //Hit every enemy in vicinity, if single enemy exist and yo uare behind do a back stab
         animator.SetInteger("AttackCounter", (animator.GetInteger("AttackCounter") + 1) % 3);
-        Debug.Log(animator.gameObject.name);
+
         Attacking = false;
-        if(playerMovement != null)playerMovement.CanMove = true;
+        
+        if (playerMovement != null) playerMovement.CanMove = true;
+
+        stats.SetStamina(stats.CurrentStamina -15);
     }
 
     private void Update()
     {
-        if(Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0)return;
-        current_combo_timer+=Time.deltaTime;
-        if(current_combo_timer >= combo_timer){
+
+
+        #region  Attack
+        if (Attacking || (player != null && player.GetLeftClick()) || animator.GetInteger("AttackCounter") == 0) return;
+        current_combo_timer += Time.deltaTime;
+        if (current_combo_timer >= combo_timer)
+        {
             current_combo_timer = 0f;
             animator.SetBool("Attack", false);
-            animator.SetInteger("AttackCounter",0);
+            animator.SetInteger("AttackCounter", 0);
         }
+        #endregion
     }
 
 }
